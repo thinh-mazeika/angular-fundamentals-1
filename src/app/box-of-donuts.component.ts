@@ -4,17 +4,23 @@ import { Donut } from './models/donut.interface';
 @Component({
   selector: 'app-box-of-donuts',
   template: `
-    <!-- Show "small box" when 4 or less, "large box" when 8 or more, otherwise just "box" -->
+    <p *ngIf="size <= 4">Small box</p>
+    <p *ngIf="size >= 8">Large box</p>
+    <p *ngIf="size > 4 && size < 8">Box</p>
     <p>Size: {{ size }}</p>
-    <!-- Show "box full" when the number of donuts equals the size of the box -->
-    <!-- Show all donuts in the box using NgFor -->
+    <p>Donuts box: {{ donuts.length }}</p>
+    <p *ngIf="size == donuts.length">Box is Full</p>
+    <div *ngFor="let donut of donuts">
+      <p>{{ donut | json }}</p>
+    </div>
+
     <app-donut [donut]="donuts[0]"></app-donut>
-  `
+  `,
 })
 export class BoxOfDonutsComponent {
   donuts: Donut[] = [
     { name: 'Bacon glazed', icing: true },
-    { name: 'Sirachi Infused', icing: false }
+    { name: 'Sirachi Infused', icing: false },
   ];
 
   @Input() size = 6;

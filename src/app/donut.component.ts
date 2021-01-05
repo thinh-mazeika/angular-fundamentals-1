@@ -4,9 +4,9 @@ import { Donut } from './models/donut.interface';
 @Component({
   selector: 'app-donut',
   template: `
-    <!-- Add text indicator "(icing)" when the donut has icing -->
     <p>Donut name: {{ donut.name }}</p>
-  `
+    <p>Icing?: {{ donut.icing }}</p>
+  `,
 })
 export class DonutComponent {
   @Input() donut: Donut;
