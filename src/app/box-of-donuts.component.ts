@@ -9,42 +9,48 @@ import { Donut } from './models/donut.interface';
       <p *ngIf="isFull()">Box full</p>
     </div>
     <div class="donuts">
-      <!-- Add property binding for the showName property -->
-      <app-donut *ngFor="let donut of donuts" [donut]="donut"></app-donut>
+      <app-donut
+        *ngFor="let donut of donuts"
+        [donut]="donut"
+        [showName]="showName"
+      ></app-donut>
+      <button (click)="toggleButton()">Toggle Donut Name</button>
     </div>
-    <!-- Add a button with a click event handler that will toggle the showName property -->
-  `
+  `,
 })
 export class BoxOfDonutsComponent {
+  showName: boolean;
   donuts: Donut[] = [
     {
       name: 'Chocolate Frosted',
       icing: true,
-      fileName: 'assets/img/donuts/donut1.png'
+      fileName: 'assets/img/donuts/donut1.png',
     },
     {
       name: 'Strawberry Frosted',
       icing: true,
-      fileName: 'assets/img/donuts/donut2.png'
+      fileName: 'assets/img/donuts/donut2.png',
     },
     {
       name: 'Chocolate Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut3.png'
+      fileName: 'assets/img/donuts/donut3.png',
     },
     {
       name: 'Cherry Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut4.png'
+      fileName: 'assets/img/donuts/donut4.png',
     },
-    { name: 'Sirachi Infused', icing: false }
+    { name: 'Sirachi Infused', icing: false },
   ];
-
-  // add a showName property that is a boolean value
 
   @Input() size = 6;
 
   isFull(): boolean {
     return this.donuts.length === this.size;
+  }
+
+  toggleButton(): void {
+    this.showName = !this.showName;
   }
 }
