@@ -11,10 +11,11 @@ import { Donut } from './models/donut.interface';
       [donuts]="donuts"
       [size]="6"
       (remove)="onRemove($event)"
+      [name]="customerName"
     ></app-box-of-donuts>
 
     <div class="customer-form">
-      <!-- add input for the customer's name -->
+      <input [(ngModel)]="customerName" placeholder="Enter your name" />
     </div>
 
     <div class="donut-form">
@@ -24,7 +25,7 @@ import { Donut } from './models/donut.interface';
       <!-- add price input -->
     </div>
   `,
-  styleUrls: ['app.component.css']
+  styleUrls: ['app.component.css'],
 })
 export class AppComponent {
   /** The selected donuts in the box. */
@@ -33,9 +34,10 @@ export class AppComponent {
   // add a donut property for the donut that is being edited
 
   // add name property
+  customerName: string;
 
   onRemove(donut: Donut): void {
-    const index = this.donuts.findIndex(d => d.name === donut.name);
+    const index = this.donuts.findIndex((d) => d.name === donut.name);
     if (index === -1) {
       return;
     }

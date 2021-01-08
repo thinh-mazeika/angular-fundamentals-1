@@ -4,8 +4,8 @@ import {
   Input,
   OnChanges,
   Output,
-  SimpleChanges
-  } from '@angular/core';
+  SimpleChanges,
+} from '@angular/core';
 import { Donut } from './models/donut.interface';
 
 @Component({
@@ -15,7 +15,7 @@ import { Donut } from './models/donut.interface';
       <div>
         <span *ngIf="size < 5">Small</span>
         <span *ngIf="size > 7">Large</span>
-        <!-- add the customer's name -->
+        {{ name }}
       </div>
       <div>
         {{ donuts ? donuts.length : 0 }}/{{ size | number: '2.0' }}
@@ -68,14 +68,15 @@ import { Donut } from './models/donut.interface';
         background: transparent;
         border: 1px solid #999;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class BoxOfDonutsComponent implements OnChanges {
   /** The donuts in the box. */
   @Input() donuts: Donut[];
 
   // add name input
+  @Input() name: string;
 
   /** Remove a donut from the box. */
   @Output() remove = new EventEmitter<Donut>();
@@ -84,8 +85,6 @@ export class BoxOfDonutsComponent implements OnChanges {
   @Input() size = 6;
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    console.log(this.donuts.length);
-
     if (
       simpleChanges.donuts &&
       simpleChanges.donuts.currentValue &&
