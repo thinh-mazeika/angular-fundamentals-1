@@ -16,7 +16,7 @@ import { Donut } from './models/donut.interface';
         [donut]="donut"
         [showName]="showName"
         (click)="selectedDonut = donut"
-        [class.selected]="donut === selectedDonut"
+        [ngClass]="{ selected: donut === selectedDonut }"
       ></app-donut>
     </div>
     <button (click)="showName = !showName"></button>
