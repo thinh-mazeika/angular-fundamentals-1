@@ -15,6 +15,8 @@ import { Donut } from './models/donut.interface';
         *ngFor="let donut of donuts"
         [donut]="donut"
         [showName]="showName"
+        (click)="selectedDonut = donut"
+        [class.selected]="donut === selectedDonut"
       ></app-donut>
     </div>
     <button (click)="showName = !showName"></button>
@@ -46,6 +48,7 @@ import { Donut } from './models/donut.interface';
   ],
 })
 export class BoxOfDonutsComponent {
+  selectedDonut: Donut;
   donuts: Donut[] = [
     {
       name: 'Chocolate Frosted',
@@ -85,8 +88,6 @@ export class BoxOfDonutsComponent {
   ];
 
   @Input() size = 6;
-
-  // add a selectedDonut property that is of type `Donut`
 
   showName = true;
 

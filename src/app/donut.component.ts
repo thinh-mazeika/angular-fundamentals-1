@@ -26,9 +26,6 @@ import { Donut } from './models/donut.interface';
       }
     `,
   ],
-  /**
-   * Add styles property and copy styles from the root styles.css
-   */
 })
 export class DonutComponent {
   @Input() donut: Donut;
