@@ -1,3 +1,6 @@
-/**
-* Add host selector, and copy styles from the root styles.css file.
-*/
+:host {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  font-family: Arial, Helvetica, sans-serif;
+}

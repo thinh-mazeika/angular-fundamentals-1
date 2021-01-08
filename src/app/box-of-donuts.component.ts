@@ -21,53 +21,67 @@ import { Donut } from './models/donut.interface';
   `,
   styles: [
     `
+      :host {
+        width: 100%;
+        border: 4px solid #e91e63;
+      }
       .selected {
         background: #efefef;
       }
 
-      /**
-       * Copy styles for app-box-of-donuts from the root styles.css file.
-       */
-    `
-  ]
+      .heading {
+        background-color: #f8bbd0;
+        padding: 10px;
+      }
+
+      .donuts {
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+    `,
+  ],
 })
 export class BoxOfDonutsComponent {
   donuts: Donut[] = [
     {
       name: 'Chocolate Frosted',
       icing: true,
-      fileName: 'assets/img/donuts/donut1.png'
+      fileName: 'assets/img/donuts/donut1.png',
     },
     {
       name: 'Strawberry Frosted',
       icing: true,
-      fileName: 'assets/img/donuts/donut2.png'
+      fileName: 'assets/img/donuts/donut2.png',
     },
     {
       name: 'Chocolate Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut3.png'
+      fileName: 'assets/img/donuts/donut3.png',
     },
     {
       name: 'Cherry Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut4.png'
+      fileName: 'assets/img/donuts/donut4.png',
     },
     {
       name: 'Strawberry Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut5.png'
+      fileName: 'assets/img/donuts/donut5.png',
     },
     {
       name: 'Vanilla Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut6.png'
+      fileName: 'assets/img/donuts/donut6.png',
     },
     {
       name: 'Cherry Coated',
       icing: true,
-      fileName: 'assets/img/donuts/donut7.png'
-    }
+      fileName: 'assets/img/donuts/donut7.png',
+    },
   ];
 
   @Input() size = 6;

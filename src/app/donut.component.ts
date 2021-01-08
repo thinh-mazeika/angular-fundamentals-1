@@ -19,7 +19,14 @@ import { Donut } from './models/donut.interface';
       [src]="donut.fileName"
       [style.width.%]="donut.name.length"
     />
-  `
+  `,
+  styles: [
+    `
+      .heading {
+        padding: 10px;
+      }
+    `,
+  ],
   /**
    * Add styles property and copy styles from the root styles.css
    */
