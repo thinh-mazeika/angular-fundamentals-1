@@ -5,8 +5,8 @@ import { Donut } from './models/donut.interface';
   selector: 'app-donut',
   template: `
     <div class="name">
-      {{ donut.name }}
-      <!-- add the donut price -->
+      {{ donut.name | titlecase }}
+      {{ donut.price | number | currency }}
     </div>
     <img
       *ngIf="donut.fileName && donut.fileName.length > 0"
@@ -29,8 +29,8 @@ import { Donut } from './models/donut.interface';
       .heading {
         padding: 10px;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class DonutComponent {
   @Input() donut: Donut;
