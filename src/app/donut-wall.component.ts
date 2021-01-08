@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+
 import { Donut } from './models/donut.interface';
 
 @Component({
@@ -10,7 +11,7 @@ import { Donut } from './models/donut.interface';
     <div class="wall">
       <div class="donut" *ngFor="let donut of donuts">
         <app-donut [donut]="donut"></app-donut>
-        <!-- add button that emits the select event -->
+        <button (click)="selected.emit(donut)">Add</button>
       </div>
     </div>
   `,
@@ -43,48 +44,47 @@ import { Donut } from './models/donut.interface';
         background: transparent;
         border: 1px solid #999;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class DonutWallComponent {
-  /** The available donuts on the wall. */
   donuts: Donut[] = [
     {
       name: 'Chocolate Frosted',
       icing: true,
-      fileName: 'assets/img/donuts/donut1.png'
+      fileName: 'assets/img/donuts/donut1.png',
     },
     {
       name: 'Strawberry Frosted',
       icing: true,
-      fileName: 'assets/img/donuts/donut2.png'
+      fileName: 'assets/img/donuts/donut2.png',
     },
     {
       name: 'Chocolate Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut3.png'
+      fileName: 'assets/img/donuts/donut3.png',
     },
     {
       name: 'Cherry Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut4.png'
+      fileName: 'assets/img/donuts/donut4.png',
     },
     {
       name: 'Strawberry Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut5.png'
+      fileName: 'assets/img/donuts/donut5.png',
     },
     {
       name: 'Vanilla Dipped',
       icing: true,
-      fileName: 'assets/img/donuts/donut6.png'
+      fileName: 'assets/img/donuts/donut6.png',
     },
     {
       name: 'Cherry Coated',
       icing: true,
-      fileName: 'assets/img/donuts/donut7.png'
-    }
+      fileName: 'assets/img/donuts/donut7.png',
+    },
   ];
 
-  // add custom event emitter `select` that emits when a donut has been added
+  @Output() selected = new EventEmitter<Donut>();
 }
