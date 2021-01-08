@@ -4,8 +4,7 @@ import { Donut } from './models/donut.interface';
 @Component({
   selector: 'app-donut',
   template: `
-    <!-- Use the NgStyle directive to set the font-weight to 'bold' for "chocolate" donuts -->
-    <div class="name">
+    <div class="name" [ngStyle]="{ 'font-weight': isBold(donut.name) }">
       <span [hidden]="!showName">{{ donut.name }}</span>
       <span
         *ngIf="donut.icing"
@@ -33,6 +32,9 @@ import { Donut } from './models/donut.interface';
 })
 export class DonutComponent {
   @Input() donut: Donut;
-
   @Input() showName: boolean;
+
+  isBold(name: string): string {
+    return /chocolate/i.test(name) ? 'bold' : 'normal';
+  }
 }
