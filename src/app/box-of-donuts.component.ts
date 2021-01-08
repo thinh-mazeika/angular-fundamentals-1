@@ -2,8 +2,10 @@ import {
   Component,
   EventEmitter,
   Input,
-  Output
-  } from '@angular/core';
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Donut } from './models/donut.interface';
 
 @Component({
@@ -65,10 +67,10 @@ import { Donut } from './models/donut.interface';
         background: transparent;
         border: 1px solid #999;
       }
-    `
-  ]
+    `,
+  ],
 })
-export class BoxOfDonutsComponent {
+export class BoxOfDonutsComponent implements OnChanges {
   /** The donuts in the box. */
   @Input() donuts: Donut[];
 
@@ -82,5 +84,11 @@ export class BoxOfDonutsComponent {
 
   isFull(): boolean {
     return this.donuts && this.donuts.length === this.size;
+  }
+
+  ngOnChanges({ donuts }: SimpleChanges) {
+    if (donuts.currentValue.length > this.size) {
+      this.donuts = this.donuts.slice(0, this.size);
+    }
   }
 }
