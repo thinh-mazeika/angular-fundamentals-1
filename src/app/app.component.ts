@@ -5,7 +5,10 @@ import { Donut } from './models/donut.interface';
   selector: 'app-root',
   template: `
     <!-- Add output binding for the edit custom event -->
-    <app-donut-wall (select)="onSelect($event)"></app-donut-wall>
+    <app-donut-wall
+      (select)="onSelect($event)"
+      (edit)="donutBeingEdited = $event"
+    ></app-donut-wall>
     <!-- Add input binding for name property -->
     <app-box-of-donuts
       [donuts]="donuts"
@@ -18,11 +21,13 @@ import { Donut } from './models/donut.interface';
       <input [(ngModel)]="customerName" placeholder="Enter your name" />
     </div>
 
-    <div class="donut-form">
+    <div class="donut-form" *ngIf="donutBeingEdited">
       <h2>Donut Kitchen</h2>
-      <!-- add form -->
-      <!-- add name input -->
-      <!-- add price input -->
+      <form #donutForm="ngForm">
+        <input name="name" [(ngModel)]="donutBeingEdited.name" required />
+        <input name="price" [(ngModel)]="donutBeingEdited.price" required />
+        <p>Valid? {{ donutForm.valid }}</p>
+      </form>
     </div>
   `,
   styleUrls: ['app.component.css'],
@@ -32,6 +37,7 @@ export class AppComponent {
   donuts: Donut[] = [];
 
   // add a donut property for the donut that is being edited
+  donutBeingEdited: Donut;
 
   // add name property
   customerName: string;

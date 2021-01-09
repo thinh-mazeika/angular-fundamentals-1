@@ -11,7 +11,7 @@ import { Donut } from './models/donut.interface';
       <div class="donut" *ngFor="let donut of donuts">
         <app-donut [donut]="donut"></app-donut>
         <button (click)="select.emit(donut)">select</button>
-        <!-- add a button that when clicked emits the edit custom event -->
+        <button (click)="edit.emit(donut)">Edit</button>
       </div>
     </div>
   `,
@@ -49,8 +49,8 @@ import { Donut } from './models/donut.interface';
       .donut > button + button {
         margin-top: 5px;
       }
-    `
-  ]
+    `,
+  ],
 })
 export class DonutWallComponent {
   /** The available donuts on the wall. */
@@ -59,47 +59,48 @@ export class DonutWallComponent {
       name: 'Chocolate Frosted',
       icing: true,
       fileName: 'assets/img/donuts/donut1.png',
-      price: 0.5
+      price: 0.5,
     },
     {
       name: 'Strawberry Frosted',
       icing: true,
       fileName: 'assets/img/donuts/donut2.png',
-      price: 0.5
+      price: 0.5,
     },
     {
       name: 'Chocolate Dipped',
       icing: true,
       fileName: 'assets/img/donuts/donut3.png',
-      price: 0.25
+      price: 0.25,
     },
     {
       name: 'Cherry Dipped',
       icing: true,
       fileName: 'assets/img/donuts/donut4.png',
-      price: 0.25
+      price: 0.25,
     },
     {
       name: 'Strawberry Dipped',
       icing: true,
       fileName: 'assets/img/donuts/donut5.png',
-      price: 0.25
+      price: 0.25,
     },
     {
       name: 'Vanilla Dipped',
       icing: true,
       fileName: 'assets/img/donuts/donut6.png',
-      price: 0.25
+      price: 0.25,
     },
     {
       name: 'Cherry Coated',
       icing: true,
       fileName: 'assets/img/donuts/donut7.png',
-      price: 0.75
-    }
+      price: 0.75,
+    },
   ];
 
   // add custom event `edit` that is emitted when the user clicks the edit button
+  @Output() edit = new EventEmitter<Donut>();
 
   /** Emit event when a donut is selected from the wall. */
   @Output() select = new EventEmitter<Donut>();
