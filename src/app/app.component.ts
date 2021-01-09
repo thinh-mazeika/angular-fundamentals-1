@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Donut } from './models/donut.interface';
 
 @Component({
@@ -26,10 +27,11 @@ import { Donut } from './models/donut.interface';
 
     <div class="donut-form" *ngIf="donutBeingEdited">
       <h2>Donut Kitchen</h2>
-      <form #donutForm="ngForm">
+      <form #donutForm="ngForm" (ngSubmit)="onSubmit(donutForm)">
         <input name="name" [(ngModel)]="donutBeingEdited.name" required />
         <input name="price" [(ngModel)]="donutBeingEdited.price" required />
         <p>Valid? {{ donutForm.valid }}</p>
+        <button type="submit">Submit</button>
       </form>
     </div>
   `,
@@ -53,5 +55,10 @@ export class AppComponent {
 
   onSelect(donut: Donut): void {
     this.donuts = [...this.donuts, donut];
+  }
+
+  onSubmit(form: NgForm) {
+    console.log('Form valid', form.valid);
+    console.log(form.value);
   }
 }
