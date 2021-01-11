@@ -28,11 +28,6 @@ export class KitchenComponent implements OnInit {
       const id = this.activatedRoute.snapshot.paramMap.get('id');
       this.donut = this.donuts.find((donut) => donut.id === Number(id));
     });
-    // get the id parameter
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-
-    // get the donut to edit/fry
-    this.donut = this.donuts.find((donut) => donut.id === Number(id));
   }
 
   onSave(donut: Donut) {
