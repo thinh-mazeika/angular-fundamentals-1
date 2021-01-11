@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { Route } from '@angular/router';
+import { Route, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DonutComponent } from './components/donut/donut.component';
 import { BoxOfDonutsComponent } from './components/box-of-donuts/box-of-donuts.component';
@@ -13,7 +13,18 @@ import { KitchenComponent } from './containers/kitchen/kitchen.component';
 // todo: add donut-shop route
 // todo: redirect to /donut-shop route when the path is empty
 // todo: add /donut/:id
-const routes: Route[] = [];
+const routes: Route[] = [
+  { path: 'donut-shop', component: DonutShopComponent },
+  {
+    path: '',
+    redirectTo: '/donut-shop',
+    pathMatch: 'full',
+  },
+  {
+    path: 'kitchen/:id',
+    component: KitchenComponent,
+  },
+];
 
 @NgModule({
   declarations: [
@@ -23,10 +34,15 @@ const routes: Route[] = [];
     DonutFormComponent,
     DonutShopComponent,
     DonutWallComponent,
-    KitchenComponent
+    KitchenComponent,
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule], // todo: import RouterModule and invoke the forRoot() static method
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
