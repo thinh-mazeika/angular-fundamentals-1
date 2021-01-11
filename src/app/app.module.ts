@@ -9,21 +9,22 @@ import { DonutFormComponent } from './components/donut-form/donut-form.component
 import { DonutWallComponent } from './components/donut-wall/donut-wall.component';
 import { DonutShopComponent } from './containers/donut-shop/donut-shop.component';
 import { KitchenComponent } from './containers/kitchen/kitchen.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Route[] = [
   {
     path: 'donut-shop',
-    component: DonutShopComponent
+    component: DonutShopComponent,
   },
   {
     path: 'kitchen/:id',
-    component: KitchenComponent
+    component: KitchenComponent,
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'donut-shop'
-  }
+    redirectTo: 'donut-shop',
+  },
 ];
 
 @NgModule({
@@ -34,15 +35,16 @@ const routes: Route[] = [
     DonutFormComponent,
     DonutShopComponent,
     DonutWallComponent,
-    KitchenComponent
+    KitchenComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
-  ], // todo: import the HttpClientModule
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

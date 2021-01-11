@@ -6,7 +6,7 @@ import { DonutService } from 'src/app/services/donut.service';
 @Component({
   selector: 'app-donut-shop',
   templateUrl: './donut-shop.component.html',
-  styleUrls: ['./donut-shop.component.css']
+  styleUrls: ['./donut-shop.component.css'],
 })
 export class DonutShopComponent implements OnInit {
   /** The donuts for the donut wall. */
@@ -19,7 +19,7 @@ export class DonutShopComponent implements OnInit {
 
   ngOnInit() {
     // todo: subscribe to the observable and set the donuts property
-    this.donuts = this.donutService.getAll();
+    this.donutService.getAll().subscribe((donuts) => (this.donuts = donuts));
   }
 
   onEdit(donut: Donut): void {
@@ -27,7 +27,7 @@ export class DonutShopComponent implements OnInit {
   }
 
   onRemove(donut: Donut): void {
-    const index = this.donuts.findIndex(d => d.name === donut.name);
+    const index = this.donuts.findIndex((d) => d.name === donut.name);
     if (index === -1) {
       return;
     }

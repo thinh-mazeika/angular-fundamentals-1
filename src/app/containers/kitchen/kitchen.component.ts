@@ -6,7 +6,7 @@ import { DonutService } from 'src/app/services/donut.service';
 @Component({
   selector: 'app-kitchen',
   templateUrl: './kitchen.component.html',
-  styleUrls: ['./kitchen.component.css']
+  styleUrls: ['./kitchen.component.css'],
 })
 export class KitchenComponent implements OnInit {
   /** The donut that we are editing/frying. */
@@ -23,13 +23,16 @@ export class KitchenComponent implements OnInit {
 
   ngOnInit() {
     // get donuts from local storage
-    this.donuts = this.donutService.getAll();
-
+    this.donutService.getAll().subscribe((donuts) => {
+      this.donuts = donuts;
+      const id = this.activatedRoute.snapshot.paramMap.get('id');
+      this.donut = this.donuts.find((donut) => donut.id === Number(id));
+    });
     // get the id parameter
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     // get the donut to edit/fry
-    this.donut = this.donuts.find(donut => donut.id === Number(id));
+    this.donut = this.donuts.find((donut) => donut.id === Number(id));
   }
 
   onSave(donut: Donut) {
