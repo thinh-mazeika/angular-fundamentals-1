@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Donut } from 'src/app/models/donut.interface';
+import { DonutService } from 'src/app/services/donut.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-kitchen',
   templateUrl: './kitchen.component.html',
-  styleUrls: ['./kitchen.component.css']
+  styleUrls: ['./kitchen.component.css'],
 })
 export class KitchenComponent implements OnInit {
   /** The donut that we are editing/frying. */
@@ -16,7 +17,11 @@ export class KitchenComponent implements OnInit {
   private donuts: Donut[];
 
   // todo: inject the DonutService
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private donutService: DonutService
+  ) {}
 
   ngOnInit() {
     // get donuts from local storage
@@ -28,18 +33,11 @@ export class KitchenComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     // get the donut to edit/fry
-    this.donut = this.donuts.find(donut => donut.id === Number(id));
+    this.donut = this.donuts.find((donut) => donut.id === Number(id));
   }
 
   onSave(donut: Donut) {
-    const index = this.donuts.findIndex(d => d.id === donut.id);
-    this.donuts[index] = donut;
-
-    // todo: use the DonutService.save() method to persist the data
-    window.localStorage.setItem(
-      environment.storage.donuts,
-      JSON.stringify(this.donuts)
-    );
+    this.donutService.save(donut);
     this.router.navigateByUrl('/');
   }
 }
